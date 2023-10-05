@@ -1,0 +1,56 @@
+.accordion-content {
+	animation: widen 3s ease 0ms 1 forwards;
+	@apply
+		p-4
+		bg-blue-950
+		overflow-hidden
+		rounded-b-xl
+		flex
+		flex-row
+		flex-wrap
+		items-center
+		gap-4
+		w-full
+		min-w-[500px]
+}
+
+.accordion-content-item {
+	@apply
+		p-2
+		bg-sky-600
+		rounded-lg
+}
+
+.user-item {
+  @apply
+    bg-sky-950
+    h-14
+    flex
+    flex-row
+    items-center
+		min-w-[500px]
+		w-full
+		overflow-auto
+		duration-150
+		hover:bg-sky-900
+		hover:cursor-pointer
+}
+
+.user-item-col {
+  @apply
+    inline-block
+    align-middle
+    flex-1
+    text-center
+		text-ellipsis
+		max-w-[33.3%]
+		overflow-hidden
+		px-4
+}
+
+
+
+@keyframes widen {
+	from { max-height: 0}
+	to { max-height: 200vh}
+}

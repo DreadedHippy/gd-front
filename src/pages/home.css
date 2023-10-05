@@ -1,0 +1,87 @@
+.user-list {
+  @apply
+    list-none
+    rounded-md
+    overflow-auto
+}
+.header {
+	@apply
+		font-bold
+		text-lg
+		bg-sky-500
+    h-16
+    flex
+    flex-row
+    items-center
+		min-w-[500px]
+		w-full
+		overflow-auto
+		hover:cursor-default
+}
+
+.logout-btn {
+	@apply
+		py-2 px-2
+		w-full
+		inline-block
+		rounded-md
+		font-bold
+		border-2
+		bg-[#eb445a]
+		border-[#eb445a]
+		text-white
+		duration-150
+    max-w-[6em]
+		hover:bg-[#ed576b]
+		hover:border-[#ed576b]
+		/* hover:text-black */
+		hover:cursor-pointer
+}
+
+.small {
+	width: auto;
+	padding: 0;
+	display: none;
+}
+
+.logout-img {
+	@apply
+		w-[2.5em]
+}
+
+.referred {
+	color: #22c55e !important;
+	font-weight: 600;
+}
+
+
+
+.invite-code {
+	@apply
+		ml-auto
+		font-semibold
+		whitespace-nowrap
+}
+
+@media (max-width: 720px) {
+	h1 {
+		display: none;
+	}
+
+	.large, .pic-text {
+		display: none;
+	}
+
+	.small {
+		display: block;
+	}
+
+	.invite-code {
+		@apply
+			ml-auto
+			font-semibold
+			flex-1
+			text-center
+	}
+	
+}
