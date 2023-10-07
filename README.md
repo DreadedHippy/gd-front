@@ -1,3 +1,9 @@
+# Solid connect project
+This is a website which connects users with referral codes. All users can see any users.
+
+## How to use
+To register, simply enter a username
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
