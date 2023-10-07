@@ -2,11 +2,15 @@ import { For, createSignal } from "solid-js";
 import { AccordionItem, TransformedUser } from "../interfaces/user";
 import './accordion.css'
 
+// Accordion element
 export default function Accordion(props: AccordionItem) {
+
+	// State management to check if accordion is open or not
 	const [isOpen, setIsOpen] = createSignal(false);
 	return (
 		<div>
 			<li class="user-item" onClick={() => {
+				// Disable opening accordion if there are 0 referrals
 				if (props.referrals.length != 0) {
 					setIsOpen(!isOpen())
 				}
@@ -16,6 +20,7 @@ export default function Accordion(props: AccordionItem) {
 				<p class="user-item-col">{props.referrals.length}</p>
 			</li>
 			{isOpen() &&
+				// Show accordion content if accordion is open
 				<div class="accordion-content">
 					<For each={props.referrals}>
 						{(referral) => (

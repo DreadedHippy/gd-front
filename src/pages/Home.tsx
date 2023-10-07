@@ -7,51 +7,54 @@ import { For, createSignal } from "solid-js";
 import Accordion from "../components/Accordion";
 import logOutIcon from '../assets/icons/log-out-outline.svg'
 
+// Page render function
 export default function Home() {
+
+	//  Get needed information
 	let username = localStorage.getItem("username");
 	let personal_invite_code = localStorage.getItem("personal_invite_code");
-	let referral_code = localStorage.getItem("referral_code");
+	// let referral_code = localStorage.getItem("referral_code");
+
+	// Get solidjs navigator
 	const navigate = useNavigate();
 
+	// If no username, user is not logged in, go to login page
 	if (!username) {
 		console.log("USERNAME: ", username);
     navigate('/login', { replace: true });
 	}
 
+	// function to copy referral code to clipboard
 	const copyReferralCode = async () =>{
-		console.log("REFF CODE: ", personal_invite_code);
-		showCopiedToast();
-		// navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
-		// 	if (result.state == "granted" || result.state == "prompt") {
-		// 		alert("Write access granted!");
-		// 	}
-		// });
 		await navigator.clipboard.writeText(personal_invite_code!);
-	
-		// Alert the copied text
-		// alert("Referral code copied");
+
+		// Indicate referral code copied
+		showCopiedToast();
 	}
 
+	// Create a store to display and manipulate received from the backend
 	let [data, setData] = createStore<any>([]);
 	let [referralCount, setReferralCount] = createSignal(0);
 	let [searchStr, setSearchStr] = createSignal("");
+
+	// Create an eventSource. SSE instead of Socket connection :)
 	let eventSource = new EventSource("http://localhost:8000/api");
 
+	// Do something on event received
 	eventSource.onmessage = function(event) {
-		// console.log('Message from server ', event.data);
-		let dataAsString: string = JSON.stringify(event.data);
+		// Parse the JSON string received from backend into JSON
 		let dataAsJson = JSON.parse(event.data);
-		console.log("DATA: ", dataAsString);
-		// console.log(dataAsJson)
+
+		// This data received from backend has a User array as its first element, and HashMap of referrals as its second element.
+		// We extract them
 		let usersArray: User[] = dataAsJson[0];
 		let referralsMap = dataAsJson[1];
 
-		// console.log(referralsMap);
-		// console.log(usersArray);
-		// console.log(personal_invite_code)
 
+		// Get the current user's personal_invite_code, and count the number of referrals associated with it
 		setReferralCount(referralsMap[personal_invite_code!].length);
 			
+		// Trasform the user received from backend into one we can display
 		setData(usersArray.map(u => {
 			let data: TransformedUser  = {
 				...u,
@@ -64,11 +67,16 @@ export default function Home() {
 		// console.log(data);
 	}
 
+	// Logging out
 	const logout = () => {
+		// Clear local storage
 		localStorage.clear();
-		console.log("LOGGING OUT")
-		navigate("/login", {replace: true});
+
+		// Close event source
 		eventSource.close();
+
+		// Go to login page
+		navigate("/login", {replace: true});
 	}
 
 
@@ -130,17 +138,24 @@ export default function Home() {
 	)
 }
 
+// Indicate referral code copied to clipboard
 async function showCopiedToast() {
+	// Get toast element
 	let element = document.getElementById("copied-toast");
 
+	// If element is already displayed on screen, do nothing
 	if (element!.style.display == "block") {
 		return
 	}
 
+	// Set duration for animation and element visibility
 	let durationInMilliseconds = 800
+
+	// Set css animation duration, make element visible
 	element!.style.setProperty("--animation-duration", `${durationInMilliseconds}ms`)
 	element!.style.display = "block"
 
+	// Make element invisible
 	setTimeout(() => {
 		element!.style.display = "none"
 	}, (durationInMilliseconds * 2) - 10);
