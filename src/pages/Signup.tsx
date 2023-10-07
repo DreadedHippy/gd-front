@@ -21,7 +21,7 @@ export default function Signup() {
     event.preventDefault();
 		const data: SignupFields = {
 			username: form.username,
-			referral_code: form.referral_code			
+			referral_code: form.referral_code
 		}
 
     signup(data, navigate);
@@ -29,6 +29,9 @@ export default function Signup() {
 
 	return (
 		<div class="m-auto bg-slate-900 min-h-screen text-center p-3">
+			<div id="toast">
+				ERROR
+			</div>
 			<form class="p-2 bg-slate-800 w-80 text-white m-auto rounded-lg mt-24 flex flex-col gap-2 justify-center items-left backdrop-blur border-2 border-slate-600" onSubmit={handleSubmit}>
 				<h2 class="text-white text-xl mb-4">Join us</h2>
 				<label for="username" class="ml-1 text-left"> Username <span class="text-red-600">*</span></label>
@@ -47,24 +50,53 @@ export default function Signup() {
 
 
 async function signup(data: SignupFields, navigate: any) {
-	console.log("SIGNING UP")
+	try {
+		let response = await fetch('http://localhost:8000/api/register', {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: JSON.stringify(data)
+		});
+		
+		let status = response.status;
+		console.log(status);
 
-	let response = await fetch('http://localhost:8000/api/register', {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-		},
-		body: JSON.stringify(data)
-	});
+		switch (status){
+			case 409:
+				showError("User already exists")
+				break;
+			case 400:
+				showError("Invalid referral code")
+				break;
+			default:
+				showError("An error occured")
+		}
 
-	let r = await response.json();
+		if (status != 200) {
+			return
+		}
 
-	localStorage.setItem('username', r.data.username);
-	localStorage.setItem('personal_invite_code', r.data.personal_invite_code);
-	localStorage.setItem('referral_code', r.data.referral_code);
+		let r = await response.json();
+		
+		localStorage.setItem('username', r.data.username);
+		localStorage.setItem('personal_invite_code', r.data.personal_invite_code);
+		localStorage.setItem('referral_code', r.data.referral_code);
+		navigate("/home", {replace: true})
+	} catch (e) {
+		console.log(e)
+	}
+}
 
-	console.log(r)
+async function showError(errorMsg: string) {
+	let element = document.getElementById("toast");
+	let durationInMilliseconds = 750
+	element!.style.setProperty("--animation-duration", `${durationInMilliseconds}ms`)
+	element!.innerHTML = errorMsg
+	element!.style.display = "block"
 
-	navigate("/home", {replace: true})
+	setTimeout(() => {
+		element!.style.display = "none"
+	}, (durationInMilliseconds * 2) - 10);
 }

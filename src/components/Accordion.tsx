@@ -10,7 +10,7 @@ export default function Accordion(props: AccordionItem) {
 				if (props.referrals.length != 0) {
 					setIsOpen(!isOpen())
 				}
-			}} classList={{"referred " : props.referral_code == props.current_user_invite_code}}>
+			}} classList={{"referred " : props.referral_code == props.current_user_invite_code, "bg-[#0B2E49]": props.idx % 2 == 0, "bg-[#11334d]": !(props.idx % 2 == 0)}}>
 				<p class="user-item-col">{props.username}</p>
 				<p class="user-item-col">{props.personal_invite_code}</p>
 				<p class="user-item-col">{props.referrals.length}</p>

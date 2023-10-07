@@ -11,5 +11,6 @@ export interface TransformedUser extends User {
 
 export interface AccordionItem extends TransformedUser {
 	current_user_invite_code: string
+	idx: number
 }
 

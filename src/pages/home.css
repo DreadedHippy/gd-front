@@ -1,8 +1,47 @@
-.user-list {
+#main {
+	background: url("../assets/wallpaper.png");
+}
+
+hr {
+	@apply
+		border-2
+		mt-2
+		
+}
+
+.header-item {
+	/* color: #2564eb94; */
   @apply
-    list-none
     rounded-md
     overflow-auto
+		flex-1
+		text-center
+}
+
+.search-bar {
+	/* input-field */
+	@apply
+		!bg-[#2f3648a6]
+		!border-[3px] !border-[#076095]
+    mb-1
+    /* bg-gray-50 */
+    /* border */
+    text-gray-100
+    /* text-lg */
+    rounded-lg
+    focus:ring-blue-500
+    block
+    w-full
+    p-2.5
+    /* dark:bg-gray-700 */
+    /* dark:border-gray-600 */
+    /* dark:placeholder-gray-400 */
+    /* dark:text-white */
+    /* dark:focus:ring-blue-500 */
+    /* dark:focus:border-blue-500 */
+}
+.user-list:nth-child(even) {
+
 }
 .header {
 	@apply
@@ -26,27 +65,29 @@
 		inline-block
 		rounded-md
 		font-bold
-		border-2
-		bg-[#eb445a]
-		border-[#eb445a]
+		underline
+		/* border-2 */
+		/* bg-[#eb445a]
+		border-[#eb445a] */
 		text-white
 		duration-150
     max-w-[6em]
-		hover:bg-[#ed576b]
-		hover:border-[#ed576b]
+		hover:bg-[#eb445a]
+		hover:border-[#eb445a]
+		hover:no-underline
 		/* hover:text-black */
 		hover:cursor-pointer
 }
 
 .small {
 	width: auto;
-	padding: 0;
+	padding: 0 0.5em;
 	display: none;
 }
 
 .logout-img {
 	@apply
-		w-[2.5em]
+		w-[2em]
 }
 
 .referred {
@@ -54,6 +95,11 @@
 	font-weight: 600;
 }
 
+.data-display {
+	@apply
+		rounded-2xl
+		overflow-auto
+}
 
 
 .invite-code {
@@ -84,4 +130,50 @@
 			text-center
 	}
 	
+}
+
+#copied-toast {
+  animation: slide-from-right var(--animation-duration) ease 0s 2 alternate;
+  @apply
+    hidden
+    bg-green-700
+    text-white
+    font-semibold
+		text-xs
+    absolute
+		top-[1em]
+    right-[50%]
+    w-[7em]
+    p-2
+		text-center
+		z-10
+    shadow-md
+    rounded-md
+  /* @apply */
+	/* hidden */
+		/* bg-rose-700
+		font-semibold
+		rounded-md
+		py-4
+		text-white
+		shadow-md
+		absolute
+		cursor-pointer
+		left-[10%]
+		w-[80%] */
+
+}
+
+@keyframes slide-from-right {
+  0% {
+    top: -10%;
+  }
+
+  30% {
+    top: 2em;
+  }
+
+  100% {
+    top: 2em;
+  }
 }

@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* border: 1px solid red; */
@@ -24,17 +27,17 @@ code {
     py-2 px-2
     w-full
     inline-block
-    rounded-md
-    font-bold
+    rounded-2xl
+    font-semibold
     border-2
-    bg-sky-700
-    border-sky-700
+    bg-sky-800
+    border-sky-800
     text-white
     duration-150
     /* m-auto
     max-w-[6em] */
-    hover:bg-sky-500
-    hover:border-sky-500
+    hover:bg-sky-600
+    hover:border-sky-600
     hover:cursor-pointer
 }
 
@@ -99,7 +102,35 @@ td {
   padding: 0.8em;
 }
 
-/* .user-item-col:nth-child(2) {
-  border-left: 1px solid rgba(32, 151, 187, 0.274);
-  border-right: 1px solid rgba(32, 151, 187, 0.274);
-} */
+#toast {
+  animation: shrink var(--animation-duration) ease 0s 2 alternate;
+  @apply
+    hidden
+    bg-rose-700
+    font-semibold
+    rounded-md
+    py-4
+    text-white
+    shadow-md
+    absolute
+    left-[10%]
+    w-[80%]
+}
+
+
+@keyframes shrink {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
