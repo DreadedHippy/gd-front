@@ -6,6 +6,7 @@ import { TransformedUser, User } from "../interfaces/user";
 import { For, createSignal } from "solid-js";
 import Accordion from "../components/Accordion";
 import logOutIcon from '../assets/icons/log-out-outline.svg'
+import { environment } from "../environments/environment";
 
 // Page render function
 export default function Home() {
@@ -38,7 +39,7 @@ export default function Home() {
 	let [searchStr, setSearchStr] = createSignal("");
 
 	// Create an eventSource. SSE instead of Socket connection :)
-	let eventSource = new EventSource("http://localhost:8000/api");
+	let eventSource = new EventSource(`${environment.baseUrl}/api`);
 
 	// Do something on event received
 	eventSource.onmessage = function(event) {

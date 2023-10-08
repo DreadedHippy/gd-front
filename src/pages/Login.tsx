@@ -1,6 +1,7 @@
 import { A, useNavigate } from "@solidjs/router";
 import {createStore} from "solid-js/store";
 import { LoginFields } from "../interfaces/form";
+import { environment } from "../environments/environment";
 
 // Page render function
 export default function Login() {
@@ -57,7 +58,7 @@ export default function Login() {
 async function login(data: LoginFields, navigate: any) {
 	try {
 		// Send a post request to the backend server, containing user information
-		let response = await fetch('http://localhost:8000/api/login', {
+		let response = await fetch(`${environment.baseUrl}/api/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -108,6 +109,9 @@ async function showError(errorMsg: string) {
 	if (element!.style.display == "block") {
 		return
 	}
+
+	// Set content to the error message
+	element!.innerHTML = errorMsg;
 
 	// Set duration for animation and element visibility
 	let durationInMilliseconds = 750
