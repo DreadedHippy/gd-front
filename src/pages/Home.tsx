@@ -41,6 +41,8 @@ export default function Home() {
 	// Create an eventSource. SSE instead of Socket connection :)
 	let eventSource = new EventSource(`${environment.baseUrl}/api`);
 
+	let sortByReferrals = false;
+
 	// Do something on event received
 	eventSource.onmessage = function(event) {
 		// Parse the JSON string received from backend into JSON
@@ -55,7 +57,7 @@ export default function Home() {
 		// Get the current user's personal_invite_code, and count the number of referrals associated with it
 		setReferralCount(referralsMap[personal_invite_code!].length);
 			
-		// Trasform the user received from backend into one we can display
+		// Transform the user received from backend into one we can display
 		setData(usersArray.map(u => {
 			let data: TransformedUser  = {
 				...u,
@@ -79,7 +81,6 @@ export default function Home() {
 		// Go to login page
 		navigate("/login", {replace: true});
 	}
-
 
 	return (
 		<div class="text-stone-50 relative" id="main">

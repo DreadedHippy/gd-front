@@ -15,7 +15,7 @@ export default function Signup() {
 	// Navigator from solidjs-router
 	let navigate = useNavigate();
 
-	// Get username from localstorage, will be defined if user is logged in
+	// Get username from localStorage, will be defined if user is logged in
 	let username = localStorage.getItem("username");
 
 	// If user is logged in, go to homepage
@@ -84,7 +84,7 @@ async function signup(data: SignupFields, navigate: any) {
 				showError("Invalid referral code")
 				break;
 			default:
-				showError("An error occured")
+				showError("An error occurred")
 		}
 
 		// If error response, return early and save nothing to localStorage

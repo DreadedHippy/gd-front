@@ -14,7 +14,7 @@ export default function Login() {
 	// Navigator from solidjs-router
 	let navigate = useNavigate();
 
-	// Get username from localstorage, will be defined if user is logged in
+	// Get username from localStorage, will be defined if user is logged in
 	let username = localStorage.getItem("username");
 
 	// If user is logged in, go to homepage
