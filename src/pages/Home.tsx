@@ -97,7 +97,7 @@ export default function Home() {
 				</button>
 			</header>
 			<div id="main" class="bg-slate-900 pt-20 px-4">
-				<div class="flex flex-row items-center justify-center gap-4">
+				<div class="input-container flex flex-row items-center justify-center gap-4">
 					<input type="search" class="search-bar" placeholder="Search for a user..." onInput={(e) => setSearchStr(e.target.value)}/>
 				</div>
 

@@ -23,10 +23,34 @@ hr {
     mb-1
     text-gray-100
     rounded-lg
+		relative
     focus:ring-blue-500
     block
     w-full
     p-2.5
+}
+
+.input-container {
+	position: relative;
+}
+
+.input-container::after {
+	content: '';
+	position: absolute;
+	right: 0.5em;
+	top: -2px;
+	width: 4em;
+	background-image: url('../assets/icons/search-outline.svg');
+	background-size: 2em;
+	background-position: center;
+	padding-bottom: 4;
+	z-index: 1;
+	@apply
+		h-full
+		rounded-md
+		bg-transparent
+		aspect-square
+		bg-no-repeat
 }
 
 .header {

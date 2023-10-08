@@ -71,37 +71,6 @@ code {
     pb-4
 }
 
-table {
-  overflow: auto;
-  min-width: 500px;
-  border-spacing: 0;
-  border-collapse: separate;
-  border-radius: 10px;
-  border: 1px solid black;
-  /* border-spacing: ; */
-  table-layout: fixed;
-  @apply
-    table-fixed
-    w-full
-    overflow-hidden
-}
-
-ul {
-  @apply
-    bg-sky-950
-}
-
-tbody {
-  @apply
-    text-center
-    h-10
-    bg-sky-950
-}
-
-td {
-  padding: 0.8em;
-}
-
 #toast {
   animation: shrink var(--animation-duration) ease 0s 2 alternate;
   @apply
@@ -115,6 +84,28 @@ td {
     absolute
     left-[10%]
     w-[80%]
+}
+
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0badb3;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(113, 169, 207)
 }
 
 
