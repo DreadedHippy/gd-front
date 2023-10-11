@@ -85,7 +85,7 @@ export default function Home() {
 	return (
 		<div class="text-stone-50 relative" id="main">
 			<div id="copied-toast">COPIED ✔</div>
-			<header class="fixed backdrop-blur-sm bg-[#2564eb94] shadow-slate-900/50 shadow-2xl h-16 min-h-16 gap-8 px-4 flex flex-row justify-flex-start items-center py-auto min-w-full w-full">
+			<header class="fixed backdrop-blur-sm bg-[#2564eb94] shadow-slate-900/50 shadow-2xl h-16 min-h-16 gap-8 px-4 flex flex-row z-10 justify-flex-start items-center py-auto min-w-full w-full">
 				<img src={icon} alt="Nodes Logo" class="h-full" />
 				<h1 class="text-2xl font-bold text-ellipsis overflow-hidden whitespace-nowrap">Welcome {username}</h1>
 				<p class="invite-code">
